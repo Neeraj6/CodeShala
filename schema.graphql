@@ -1,0 +1,188 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+type Categories {
+    docs: [Category]
+    hasNextPage: Boolean!
+    hasPrevPage: Boolean!
+    nextPage: Int
+    page: Int
+    prevPage: Int
+    totalDocs: Int
+    totalPages: Int
+}
+
+type Category {
+    _id: ID!
+    cover: String
+    createdAt: String
+    description: String
+    meta: String
+    name: String
+    parent: Category
+    slug: String
+    thumbnail: String
+    updatedAt: String
+}
+
+type File {
+    encoding: String!
+    filename: String!
+    mimetype: String!
+    url: String
+}
+
+type Mutation {
+    createCategory(categoryInput: CategoryInput): Category
+    createProduct(productInput: ProductInput): Product
+    deleteCategory(categoryId: ID!): Category
+    deleteProduct(productId: ID!): Product
+    login(email: String!, password: String!): User
+    logout: Boolean
+    updateCategory(categoryId: ID!, categoryInput: CategoryInput): Category
+    updateProduct(productId: ID!, productInput: ProductInput): Product
+    uploadFile(file: Upload!): File
+}
+
+type PageInfo {
+    cursor: String!
+    endCursor: String
+    hasNextPage: Boolean!
+    nextCursor: String
+    prevCursor: String
+    startCursor: String
+}
+
+type Product {
+    _id: ID!
+    author: User
+    availability: Availability
+    categories: [Category]
+    code: String
+    createdAt: String
+    description: String
+    discountPrice: Float
+    fileUrl: String
+    gallery: [String]
+    linkedProducts: [Product]
+    meta: String
+    price: Float
+    quantity: Int
+    slug: String
+    tags: [String]
+    thumbnail: String
+    title: String
+    updatedAt: String
+}
+
+type Products {
+    docs: [Product]
+    hasNextPage: Boolean!
+    hasPrevPage: Boolean!
+    nextPage: Int
+    page: Int
+    prevPage: Int
+    totalDocs: Int
+    totalPages: Int
+}
+
+type Query {
+    categories(limit: Int, name: String, orderBy: String, page: Int): Categories
+    me: User
+    product(id: ID, slug: String): Product
+    products(author: String, categories: [ID], endDate: String, limit: Int, orderBy: String, page: Int, startDate: String, title: String): Products
+}
+
+type User {
+    _id: ID!
+    active: Boolean
+    cover: String
+    createdAt: String
+    email: String
+    enabled: Boolean
+    lastLoginAt: String
+    mobile: String
+    name: String
+    parent: User
+    profilePic: String
+    role: Role
+    updatedAt: String
+    username: String
+}
+
+type Users {
+    docs: [User]
+    hasNextPage: Boolean!
+    hasPrevPage: Boolean!
+    nextPage: Int
+    page: Int
+    prevPage: Int
+    totalDocs: Int
+    totalPages: Int
+}
+
+enum Availability {
+    available
+    trashed
+    unavailable
+}
+
+enum Role {
+    admin
+    creator
+    customer
+}
+
+input CategoryInput {
+    cover: String
+    description: String
+    meta: String
+    name: String
+    parent: ID
+    slug: String
+    thumbnail: String
+}
+
+input ProductInput {
+    author: ID
+    availability: String
+    categories: [ID]
+    code: String!
+    description: String
+    discountPrice: Float
+    fileUrl: String
+    gallery: [String]
+    linkedProducts: [ID]
+    meta: String
+    price: Float
+    quantity: Int
+    slug: String!
+    tags: [String]
+    thumbnail: String
+    title: String!
+}
+
+input UserInput {
+    city: String
+    dob: String
+    email: String!
+    fName: String!
+    gender: String
+    grade: String
+    lName: String
+    password: String!
+    phone: String
+    role: String
+}
+
+input resetPasswordInput {
+    password: String!
+    resetToken: String!
+}
+
+
+scalar Upload
